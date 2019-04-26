@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">InAuth Challenge</string>
+    <string name="pretty_json">Pretty JSON</string>
+    <string name="location_info">Location Info</string>
+    <string name="apps_info">Apps Info</string>
+
+    <string name="current_gps_coordinate">Current GPS coordinate</string>
+    <string name="current_distance_to_sf">Distance to the center of San Francisco</string>
+    <string name="center_of_sf">The center of San Francisco is “Twin Peaks” :\n\t\t\tLatitude of Twin Peaks: 37.754362\n\t\t\tLongitude of Twin Peaks: -122.447141</string>
+    <string name="apps_info_description">This is the “String” that already is saved to the current app\'s database. Each line includes the following data:\n\nName, packageName, codeSize, dataSize, cacheSize</string>
+
+    <string name="no_result" >There is no result for this query.\nPlease try something else!</string>
+    <string name="no_result_location" >Unable to obtain device\'s location info.\nPlease try again!</string>
+    <string name="no_apps_info" >No apps info is available on storage.\nPlease try again!</string>
+    <string name="location_off" >Device Location is turned off.\nPlease turn it on and try again!</string>
+    <string name="primary_message" >Results will be displayed here!</string>
+    <string name="new_request_pretty_json">This is a new request for PRETTY JSON!</string>
+    <string name="new_request_location">This is a new request for LOCATION INFO!</string>
+    <string name="new_request_apps_info">This is a new request for APPS INFO!</string>
+
+    <string name="title_requirement">Requirement</string>
+    <string name="message_location_requirement">In order to get location info, the app should have access to your location. Do you want to continue?</string>
+    <string name="message_usage_stats_requirement">In order to get applications info, the app should have access to usage stats. Do you want to continue?</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_continue">Continue</string>
+
+</resources>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+                name="viewmodel"
+                type="com.inauth.codechallenge.tasks.TasksViewModel"/>
+    </data>
+
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:fillViewport="true"
+            android:background="@color/color_viewer"
+            android:padding="@dimen/layout_padding">
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal"
+                android:fillViewport="true">
+
+            <TextView
+                    android:id="@+id/prettyJsonPreview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/background_dark"
+                    android:typeface="monospace"
+                    style="@android:style/TextAppearance.Small"
+                    android:text="@{viewmodel.prettyJsonString}"/>
+
+        </HorizontalScrollView>
+
+    </ScrollView>
+
+</layout>

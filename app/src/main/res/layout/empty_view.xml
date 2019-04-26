@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+                name="viewmodel"
+                type="com.inauth.codechallenge.tasks.TasksViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:id="@+id/noResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/noResultIcon"
+                android:alpha="0.8"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/list_item_margin_medium"
+                android:layout_gravity="center"
+                android:src="@{ContextCompat.getDrawable(context, safeUnbox(viewmodel.noResultIconRes))}" />
+
+        <TextView
+                android:id="@+id/noResultLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="@{context.getString(safeUnbox(viewmodel.noResultLabelRes))}"
+                android:layout_marginBottom="@dimen/list_item_padding"/>
+
+    </LinearLayout>
+
+</layout>

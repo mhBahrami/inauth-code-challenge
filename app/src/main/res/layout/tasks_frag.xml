@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+        <import type="androidx.core.content.ContextCompat" />
+
+        <variable
+                name="viewmodel"
+                type="com.inauth.codechallenge.tasks.TasksViewModel"/>
+    </data>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+
+        <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:layout_centerHorizontal="true"
+                android:visibility="@{safeUnbox(viewmodel.dataLoading) ? View.VISIBLE : View.GONE}"/>
+
+        <LinearLayout
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/getPrettyJson"
+                    android:text="@string/pretty_json"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:enabled="@{safeUnbox(viewmodel.buttonEnable)}" />
+
+            <!--style="?android:attr/buttonBarButtonStyle"-->
+
+            <Button
+                    android:id="@+id/getLocationInfo"
+                    android:text="@string/location_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:enabled="@{safeUnbox(viewmodel.buttonEnable)}"/>
+
+            <Button
+                    android:id="@+id/getAppsInfo"
+                    android:text="@string/apps_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="@{safeUnbox(viewmodel.buttonEnable)}"/>
+
+        </LinearLayout>
+
+        <include
+                layout="@layout/empty_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{safeUnbox(viewmodel.emptyVisibility) ? View.VISIBLE : View.GONE}"
+                bind:viewmodel="@{viewmodel}"/>
+
+        <include
+                layout="@layout/pretty_json_viewer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/searchBar"
+                android:visibility="@{safeUnbox(viewmodel.prettyJsonVisibility) ? View.VISIBLE : View.GONE}"
+                bind:viewmodel="@{viewmodel}"/>
+
+        <include
+                layout="@layout/location_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/searchBar"
+                android:visibility="@{safeUnbox(viewmodel.locationViewVisibility) ? View.VISIBLE : View.GONE}"
+                bind:viewmodel="@{viewmodel}"/>
+
+        <include
+                layout="@layout/apps_info_viewer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/searchBar"
+                android:visibility="@{safeUnbox(viewmodel.appsInfoVisibility) ? View.VISIBLE : View.GONE}"
+                bind:viewmodel="@{viewmodel}"/>
+
+
+    </RelativeLayout>
+
+</layout>

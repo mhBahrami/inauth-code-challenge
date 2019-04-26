@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+                name="viewmodel"
+                type="com.inauth.codechallenge.tasks.TasksViewModel"/>
+    </data>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/layout_padding"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/apps_info_description"
+                android:layout_marginBottom="@dimen/list_item_margin_medium"
+                android:textColor="@android:color/background_dark"
+                style="@android:style/TextAppearance.Small"/>
+
+        <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                android:background="@color/color_viewer"
+                android:fillViewport="true">
+
+            <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal"
+                    android:fillViewport="true">
+
+                <TextView
+                        android:id="@+id/appsInfoPreview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/background_dark"
+                        android:typeface="monospace"
+                        style="@android:style/TextAppearance.Small"
+                        android:text="@{viewmodel.appsInfoString}"/>
+
+            </HorizontalScrollView>
+
+        </ScrollView>
+    </LinearLayout>
+
+</layout>
