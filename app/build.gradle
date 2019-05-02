@@ -12,6 +12,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        externalNativeBuild {
+            cmake {
+                cppFlags "-frtti -fexceptions"
+            }
+        }
     }
 
     buildTypes {
@@ -61,6 +66,13 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/native-lib/CMakeLists.txt')
+            version "$cmakeVersion"
+        }
     }
 }
 

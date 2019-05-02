@@ -8,6 +8,7 @@ import com.google.android.gms.location.LocationServices
 import com.inauth.codechallenge.data.source.AppRepository
 import com.inauth.codechallenge.data.source.local.AppsLocalDataSource
 import com.inauth.codechallenge.data.source.local.DeviceAppInfoDatabase
+import com.inauth.codechallenge.data.source.local.CryptoApi
 import com.inauth.codechallenge.data.source.remote.GiphyApiService
 import com.inauth.codechallenge.data.source.remote.GiphyRemoteDataSource
 import com.inauth.codechallenge.data.source.sensor.LocationDataSource
@@ -30,7 +31,8 @@ object Injection {
                     context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager,
                     context.getSystemService(Context.STORAGE_SERVICE) as StorageManager,
                     appPackageManager,
-                    database.appsInfoDao()
+                    database.appsInfoDao(),
+                    CryptoApi.getInstance()
                 )
             )
         } else {

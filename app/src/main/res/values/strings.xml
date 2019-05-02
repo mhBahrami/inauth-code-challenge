@@ -7,7 +7,7 @@
     <string name="current_gps_coordinate">Current GPS coordinate</string>
     <string name="current_distance_to_sf">Distance to the center of San Francisco</string>
     <string name="center_of_sf">The center of San Francisco is “Twin Peaks” :\n\t\t\tLatitude of Twin Peaks: 37.754362\n\t\t\tLongitude of Twin Peaks: -122.447141</string>
-    <string name="apps_info_description">This is the “String” that already is saved to the current app\'s database. Each line includes the following data:\n\nName, packageName, codeSize, dataSize, cacheSize</string>
+    <string name="apps_info_description">This is the “Decrypted String” that already is saved to the current app\'s database. It includes the info regarding all applications of the device in the following format:\n\nName, packageName, codeSize, dataSize, cacheSize</string>
 
     <string name="no_result" >There is no result for this query.\nPlease try something else!</string>
     <string name="no_result_location" >Unable to obtain device\'s location info.\nPlease try again!</string>

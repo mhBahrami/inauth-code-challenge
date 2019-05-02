@@ -28,4 +28,11 @@ class TasksActivity : AppCompatActivity() {
 
     fun obtainViewModel(): TasksViewModel = obtainViewModel(TasksViewModel::class.java)
 
+    companion object {
+
+        // Used to load the 'native-lib' library on application startup.
+        init {
+            System.loadLibrary("native-lib")
+        }
+    }
 }

@@ -20,7 +20,8 @@ class AppsLocalDataSource private constructor(
     private val appStorageStatsManager: StorageStatsManager,
     private val appStorageManager: StorageManager,
     private val appPackageManager: PackageManager,
-    private val appsInfoDao: AppsInfoDao
+    private val appsInfoDao: AppsInfoDao,
+    private val appCrypto: Crypto
 ) : AppDataSource.LocalDataSource {
 
     /**
@@ -44,7 +45,6 @@ class AppsLocalDataSource private constructor(
         appExecutors.diskIO.execute {
             //get a list of installed apps.
             val packages = appPackageManager.getInstalledApplications(PackageManager.GET_META_DATA)
-
             val stringBuilder = StringBuilder()
             for (packageInfo in packages) {
                 var name = "Not Available"
@@ -70,7 +70,7 @@ class AppsLocalDataSource private constructor(
                                     val appSize = storageStats.appBytes
                                     val appDataSize = storageStats.dataBytes
                                     val appCacheSize = storageStats.cacheBytes
-                                    stringBuilder.append("$name, ${packageInfo.packageName}, $appSize, $appDataSize, $appCacheSize\n")
+                                    stringBuilder.append("$name, ${packageInfo.packageName}, $appSize, $appDataSize, $appCacheSize,")
                                 } catch (e: Exception) {
                                     e.printStackTrace()
                                 }
@@ -85,12 +85,24 @@ class AppsLocalDataSource private constructor(
                 }
             }
 
+            // Convert it to string
             val appsInfoString = stringBuilder.toString()
             if (appsInfoString.trim().isEmpty()) {
                 appExecutors.mainThread.execute { callback.onDataNotAvailable() }
             } else {
-                appsInfoDao.insertAppsInfo(AppsInfo(appsInfoString, appsInfoID))
+                // Encrypt data using native code
+                val encryptedInfo = appCrypto.onEncryptAES(appsInfoString)
+
+                // Decrypt the encrypted data using java classes
+                val decryptedInfo = appCrypto.onDecryptAES(encryptedInfo)
+
+                // Replace the old data into database with the new one
+                appsInfoDao.insertAppsInfo(AppsInfo(decryptedInfo, appsInfoID))
+
+                // Get the most updated data from database
                 val savedInfo = appsInfoDao.getAppsInfoById(appsInfoID)
+
+                // Display it to the user
                 appExecutors.mainThread.execute { callback.onLoadedAppsInfo(savedInfo?.info ?: "NULL") }
             }
         }
@@ -105,7 +117,8 @@ class AppsLocalDataSource private constructor(
                         appStorageStatsManager: StorageStatsManager,
                         appStorageManager: StorageManager,
                         appPackageManager: PackageManager,
-                        appsInfoDao: AppsInfoDao): AppsLocalDataSource {
+                        appsInfoDao: AppsInfoDao,
+                        appCrypto: Crypto): AppsLocalDataSource {
             if (INSTANCE == null) {
                 synchronized(AppsLocalDataSource::javaClass) {
                     INSTANCE = AppsLocalDataSource(
@@ -113,7 +126,8 @@ class AppsLocalDataSource private constructor(
                         appStorageStatsManager,
                         appStorageManager,
                         appPackageManager,
-                        appsInfoDao)
+                        appsInfoDao,
+                        appCrypto)
                 }
             }
             return INSTANCE!!
